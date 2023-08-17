@@ -70,6 +70,6 @@ module.exports = {
     getAllVideoGames,
     getVideoGameById,
     createVideoGame,
-    // updateVideoGame,
+    updateVideoGame,
     deleteVideoGame
 }
