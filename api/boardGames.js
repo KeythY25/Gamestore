@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const { getAllBoardGames,
-    getBoardGameById,
-    createBoardGame,
-    updateBoardGame,
-    deleteBoardGame } = require('../db/boardGames');
+    // getBoardGameById,
+    // createBoardGame,
+    // updateBoardGame,
+    // deleteBoardGame 
+} = require('../db/boardGames');
 
 // GET - /api/board-games - get all board games
 router.get('/', async (req, res, next) => {

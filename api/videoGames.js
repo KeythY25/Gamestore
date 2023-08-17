@@ -5,9 +5,10 @@ const REPLACE_ME = 'HELP REPLACE ME!!!!';
 
 const { getAllVideoGames,
     getVideoGameById,
-    createVideoGame,
-    updateVideoGame,
-    deleteVideoGame } = require('../db/videoGames');
+    // createVideoGame,
+    // updateVideoGame,
+    // deleteVideoGame 
+} = require('../db/videoGames');
 
 // GET - /api/video-games - get all video games
 router.get('/', async (req, res, next) => {
@@ -22,7 +23,8 @@ router.get('/', async (req, res, next) => {
 // GET - /api/video-games/:id - get a single video game by id
 router.get('/:id', async (req, res, next) => {
     try {
-        const videoGame = await getVideoGameById(REPLACE_ME);
+        const {id} = req.params;
+        const videoGame = await getVideoGameById(id);
         res.send(videoGame);
     } catch (error) {
         next(error);

@@ -2,17 +2,17 @@ const express = require('express');
 const app = express();
 const PORT = 8080;
 
-// init morgan
-const morgan = require('morgan');
-app.use(morgan('dev'));
+// // init morgan
+// const morgan = require('morgan');
+// app.use(morgan('dev'));
 
-// init body-parser
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
+// // init body-parser
+// const bodyParser = require('body-parser');
+// app.use(bodyParser.json());
 
-// init cors
-const cors = require('cors');
-app.use(cors());
+// // init cors
+// const cors = require('cors');
+// app.use(cors());
 
 // init db client
 const client = require('./db/client');
