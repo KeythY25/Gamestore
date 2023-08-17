@@ -5,7 +5,7 @@ const REPLACE_ME = 'HELP REPLACE ME!!!!';
 
 const { getAllVideoGames,
     getVideoGameById,
-    // createVideoGame,
+    createVideoGame,
     // updateVideoGame,
     // deleteVideoGame 
 } = require('../db/videoGames');
@@ -32,8 +32,16 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // POST - /api/video-games - create a new video game
-router.patch('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     // LOGIC GOES HERE 
+    try{
+        console.log(req.body)
+        const newVideoGame = await createVideoGame(req.body);
+        res.send(newVideoGame)
+
+    }catch (error){
+        console.log(error)
+    }
 });
 
 

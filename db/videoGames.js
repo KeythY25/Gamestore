@@ -29,8 +29,14 @@ async function getVideoGameById(id) {
 }
 
 // POST - /api/video-games - create a new video game
-async function createVideoGame(body) {
-    // LOGIC GOES HERE
+async function createVideoGame(name, description, price) {
+    try{
+        const {rows: {newVideoGame}} = await client.query(`INSERT INTO videoGames (name, description, price) VALUES ($1, $2, $3) RETURNING *`, 
+        [name, description, price]);
+        return newVideoGame
+    } catch(error){
+        throw error;
+    }
 }
 
 // PUT - /api/video-games/:id - update a single video game by id
@@ -45,8 +51,8 @@ async function deleteVideoGame(id) {
 
 module.exports = {
     getAllVideoGames,
-    getVideoGameById
-    // createVideoGame,
+    getVideoGameById,
+    createVideoGame,
     // updateVideoGame,
     // deleteVideoGame
 }
