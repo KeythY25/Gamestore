@@ -31,7 +31,7 @@ async function getVideoGameById(id) {
 // POST - /api/video-games - create a new video game
 async function createVideoGame(name, description, price) {
     try{
-        const {rows: {newVideoGame}} = await client.query(`INSERT INTO videoGames (name, description, price) VALUES ($1, $2, $3) RETURNING *`, 
+        const {rows: [newVideoGame]} = await client.query(`INSERT INTO videoGames (name, description, price) VALUES ($1, $2, $3) RETURNING *`, 
         [name, description, price]);
         return newVideoGame
     } catch(error){
@@ -42,11 +42,28 @@ async function createVideoGame(name, description, price) {
 // PUT - /api/video-games/:id - update a single video game by id
 async function updateVideoGame(id, fields = {}) {
     // LOGIC GOES HERE
+    try{
+        const {row : [updateVC]} = await client.query(
+            `SELECT  * FROM videoGames
+            
+            UPDATE field SET name = $1 
+            WHERE id = $2; `, [fields, id]
+        );
+    } catch (error){
+        throw error;
+    }
 }
 
 // DELETE - /api/video-games/:id - delete a single video game by id
 async function deleteVideoGame(id) {
-    // LOGIC GOES HERE
+    try{
+        const {row: [deleteVideoGame]} = await client.query( 
+            `DELETE FROM videoGames 
+            WHERE id = $1;`, 
+            [id]);
+    }catch (error){
+        throw error;
+    }
 }
 
 module.exports = {
@@ -54,5 +71,5 @@ module.exports = {
     getVideoGameById,
     createVideoGame,
     // updateVideoGame,
-    // deleteVideoGame
+    deleteVideoGame
 }

@@ -6,8 +6,9 @@ const REPLACE_ME = 'HELP REPLACE ME!!!!';
 const { getAllVideoGames,
     getVideoGameById,
     createVideoGame,
-    // updateVideoGame,
-    // deleteVideoGame 
+    updateVideoGame,
+    deleteVideoGame, 
+    deleteVideoGame
 } = require('../db/videoGames');
 
 // GET - /api/video-games - get all video games
@@ -47,12 +48,26 @@ router.post('/', async (req, res, next) => {
 
 // PUT - /api/video-games/:id - update a single video game by id
 router.put('/:id', async (req, res, next) => {
-    // LOGIC GOES HERE 
+    try{
+        const {id} = req.params
+        const updateVC = await updateVideoGame(id, req.body);
+        res.send(updateVC);
+    }
+    catch(error)
+    {
+        console.log(error)
+    }
 });
 
 // DELETE - /api/video-games/:id - delete a single video game by id
 router.delete('/:id', async (req, res, next) => {
-    // LOGIC GOES HERE
+    try{
+        const {id}= req.params;
+        const deletedVG = await deleteVideoGame(id);
+        res.send(deletedVG);
+    }catch(error){
+        console.log(error);
+    }
 });
 
 module.exports = router;
